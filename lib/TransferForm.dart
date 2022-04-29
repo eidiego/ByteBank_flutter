@@ -29,7 +29,7 @@ class TransferForm extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                _createTransfer();
+                _createTransfer(context);
               },
               child: const Text('Confirmar'),
             )
@@ -39,11 +39,13 @@ class TransferForm extends StatelessWidget {
     );
   }
 
-  void _createTransfer() {
+  void _createTransfer(context) {
     final int? numeroConta = int.tryParse(_controllerFieldNumberAcc.text);
     final double? valor = double.tryParse(_controllerFieldValue.text);
     if (numeroConta != null && valor != null) {
       final createdTransfer = Transfers(valor, numeroConta);
+      debugPrint('$createdTransfer');
+      Navigator.pop(context, createdTransfer);
     }
   }
 }

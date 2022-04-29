@@ -11,7 +11,7 @@ class BytebankApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: TransferForm(),
+        body: TransferList(),
       ),
     );
   }
@@ -31,7 +31,14 @@ class TransferList extends StatelessWidget {
         TransferItem(Transfers(600.0, 777)),
       ]),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          final Future<Transfers?> future = Navigator.push(context,
+              MaterialPageRoute(builder: ((context) => TransferForm())));
+          future.then((TransferReceived) => {
+                debugPrint('Chegou no then'),
+                debugPrint("$TransferReceived"),
+              });
+        },
         child: const Icon(Icons.add),
       ),
     );
